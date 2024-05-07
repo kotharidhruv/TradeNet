@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: #f0f0f0; /* Light gray background */
+            color: #333; /* Dark gray text */
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #343a40; /* Dark gray background for navigation */
+            color: #fff; /* White text */
+            padding: 1rem;
+        }
+
+        nav #title {
+            margin-right: auto;
+            font-size: 1.5rem;
+            animation: titleColorChange 5s infinite alternate; /* Apply animation */
+        }
+
+        @keyframes titleColorChange {
+            0% {
+                color: white;
+            }
+
+            50% {
+                color: orange;
+            }
+
+            100% {
+                color: white;
+            }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 1rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center horizontally */
+            padding: 20px;
+        }
+
+        .login-content {
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .item-details {
+            text-align: center; /* Center text */
+            margin-bottom: 20px; /* Add margin to create space below the item details */
+        }
+
+        .item-details img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px; /* Adjust margin for spacing */
+        }
+
+        .item-details h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333; /* Dark gray text for item name */
+        }
+
+        .item-details p {
+            margin-bottom: 10px;
+            color: #666; /* Dark gray text for item description */
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a.button {
+            text-decoration: none;
+            color: #fff;
+            background-color: #70a8af;
+            border-radius: 5px;
+            padding: 10px 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        a.button:hover {
+            background-color: #497e87;
+        }
+
+        a.button i {
+            margin-right: 5px;
+        }
+    </style>
+
+    <!-- Include Firebase and JavaScript sources -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js"></script>
+    <script type="module" src="itemDetails.js" defer></script>
+</head>
+
+<body>
+    <nav>
+        <h1 id="title">Trade Net</h1>
+        <ul id="links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="#consoles">Products</a></li>
+            <li><a href="/login.html">Login</a></li>
+            <li><a href="/signup.html">Sign Up</a></li>
+            <li><a href="/postItems/postItems.html">Post</a></li>
+            <li><a href="/itemPosted/postedItems.html">Posted Items</a></li>
+            <li><a href="/allItemsPosted/allItemsPosted.html">All Posted Items</a></li>
+        </ul>
+    </nav>
+    <div class="login-container">
+        <div class="login-content">
+            <div class="item-details" id="itemDetails">
+                <h2>Item Details</h2>
+                <!-- Item details will be displayed here -->
+                <div id="itemImage"></div>
+                <h3 id="itemName"></h3>
+                <p id="itemDescription"></p>
+                <div class="button-container">
+                    <a href="/index.html" class="button"><i class="fas fa-home"></i> Home</a>
+                    <a href="/allItemsPosted/allItemsPosted.html" class="button"><i class="fas fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
