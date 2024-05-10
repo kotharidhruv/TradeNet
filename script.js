@@ -31,13 +31,45 @@ function changeSlide() {
     slides[currentSlide].classList.toggle("show");
 }
 
-function signOut() {
+const signout = document.getElementById('signout');
+signout.onclick= function(){
     localStorage.removeItem('userId');
     window.location.href = 'index.html';
 }
 
+function displayPopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'block';
+}
+
+// Function to close the popup
+    const popup = document.getElementById('closePopUp');
+    const popUpDisplay = document.getElementById('popup');
+    popup.onclick = function(){
+        popUpDisplay.style.display = 'none';
+    }
+    
+
+// Wait for DOMContentLoaded event before executing the code
+document.addEventListener('DOMContentLoaded', function() {
+    displayRandomItems();
+    const popupShown = localStorage.getItem('popupShown');
+    if (!popupShown) {
+        // If the popup has not been shown, display it
+        displayPopup();
+
+        // Set a flag in localStorage to indicate that the popup has been shown
+        localStorage.setItem('popupShown', 'true');
+    }
+});
+
+
+
+
 function displayRandomItems() {
     const itemsRef = ref(db, 'items/');
+    const itemsList = document.getElementById('itemsList');
+    itemsList.innerHTML = ''; // Clear previous content
 
     onValue(itemsRef, function(snapshot) {
         const users = snapshot.val();
@@ -61,9 +93,6 @@ function displayRandomItems() {
                 }
             });
 
-            const itemsList = document.getElementById('itemsList');
-            itemsList.innerHTML = '';
-
             // Generate three random indices
             const randomIndices = [];
             while (randomIndices.length < 3) {
@@ -79,21 +108,38 @@ function displayRandomItems() {
                 const itemId = item.itemId;
 
                 const itemDiv = document.createElement('div');
-                itemDiv.classList.add('item');
+                itemDiv.classList.add('random-item');
+
+                // Set width to 33.33%
+                itemDiv.style.width = 'calc(33.33% - 20px)'; // Adjust as needed
 
                 const itemLink = document.createElement('a');
                 itemLink.href = `../itemDetails/itemDetails.html?userId=${item.userId}&itemId=${item.itemId}`;
                 itemLink.style.textDecoration = 'none';
 
-                const itemTitle = document.createElement('h3');
-                itemTitle.textContent = item.name;
-
-                const itemDescription = document.createElement('p');
-                itemDescription.textContent = item.description;
+                const itemImageContainer = document.createElement('div');
+                itemImageContainer.classList.add('image-container');
 
                 const itemImage = document.createElement('img');
 
                 getDownloadURL(storageRef(storage, `images/${itemId}`)).then((url) => {
+                    itemImage.onload = function() {
+                        // Set fixed dimensions for the image
+                        const targetWidth = 200; // Adjust as needed
+                        const targetHeight = 300; // Adjust as needed
+                        const aspectRatio = this.width / this.height;
+
+                        // Set width and height based on aspect ratio
+                        if (aspectRatio > 1) {
+                            // Landscape image
+                            this.width = targetWidth;
+                            this.height = targetWidth / aspectRatio;
+                        } else {
+                            // Portrait or square image
+                            this.height = targetHeight;
+                            this.width = targetHeight * aspectRatio;
+                        }
+                    };
                     itemImage.src = url;
                 }).catch((error) => {
                     console.error('Error getting download URL:', error);
@@ -101,13 +147,21 @@ function displayRandomItems() {
                     itemImage.src = 'placeholder.jpg'; // Provide a placeholder image URL
                 });
 
-                
+                const itemText = document.createElement('div');
+                itemText.classList.add('text');
 
-                itemLink.appendChild(itemTitle);
-                itemLink.appendChild(itemDescription);
-                itemDiv.appendChild(itemImage);
+                const itemTitle = document.createElement('h3');
+                itemTitle.textContent = item.name;
+
+                const itemDescription = document.createElement('p');
+                itemDescription.textContent = item.description;
+
+                itemImageContainer.appendChild(itemImage);
+                itemText.appendChild(itemTitle);
+                itemText.appendChild(itemDescription);
+                itemLink.appendChild(itemImageContainer);
+                itemLink.appendChild(itemText);
                 itemDiv.appendChild(itemLink);
-
                 itemsList.appendChild(itemDiv);
             });
         } else {
@@ -117,6 +171,3 @@ function displayRandomItems() {
         console.error('Error retrieving items:', error);
     });
 }
-
-// Call displayRandomItems function when the window loads
-window.onload = displayRandomItems;

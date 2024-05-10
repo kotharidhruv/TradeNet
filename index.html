@@ -18,14 +18,14 @@
 
     nav {
       background-color: #084440;
-      color: #fff;
+      color: #ddffd4;
       padding: 1rem;
     }
 
     nav #title {
       margin-right: auto;
       font-size: 1.5rem;
-      color: #fff;
+      color: #ddffd4;
     }
 
     nav ul {
@@ -39,13 +39,13 @@
 
     nav ul li a {
       text-decoration: none;
-      color: #fff;
+      color: #ddffd4;
     }
 
     header {
       text-align: center;
       padding: 2rem;
-      background-color: #fff;
+      background-color: #ddffd4;
     }
 
     header h1 {
@@ -54,20 +54,19 @@
 
     section {
       padding: 2rem;
-      background-color: #fff;
+      background-color: #ddffd4;
     }
 
     .random-items {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
+      overflow-x: auto; /* Add horizontal scroll if needed */
       padding: 2rem;
-      background-color: #fff;
+      background-color: #ddffd4;
     }
 
     .random-item {
-      width: 300px;
-      margin-bottom: 20px;
+      width: 300px; /* Set a fixed width for each item */
+      margin-right: 20px; /* Add spacing between items */
       background-color: #fff;
       border-radius: 8px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -75,8 +74,11 @@
       color: #084440;
     }
 
+    .random-item:last-child {
+      margin-right: 0; /* Remove margin from the last item to prevent extra spacing */
+    }
+
     .random-item .image-container {
-      width: 100%;
       height: 200px;
       overflow: hidden;
       border-top-left-radius: 8px;
@@ -93,6 +95,18 @@
       padding: 1rem;
     }
 
+    body {
+      min-height: 100vh; /* Ensure body takes up at least the full viewport height */
+      margin: 0; /* Remove default margin */
+      padding: 0; /* Remove default padding */
+      display: flex;
+      flex-direction: column; /* Stack child elements vertically */
+    }
+
+    section {
+      flex-grow: 1; /* Allow section to grow and take up remaining vertical space */
+    }
+
     footer {
       position: fixed;
       left: 0;
@@ -103,6 +117,17 @@
       text-align: center;
       padding: 10px 0;
       height: 100px 0;
+      flex-shrink: 0;
+    }
+
+    button {
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
+      cursor: pointer;
+      margin-left: 50em;
     }
   </style>
 
@@ -122,6 +147,13 @@
       <li><a href="postItems/postItems.html">Post</a></li>
       <li><a href="itemPosted/postedItems.html">Posted Items</a></li>
       <li><a href="allItemsPosted/allItemsPosted.html">All Posted Items</a></li>
+      <style>
+        #signout {
+            background-color: #b31500;
+        }
+      </style>
+
+      <li><button id='signout'>Sign Out</button></li>
     </ul>
   </nav>
   <header>
@@ -138,15 +170,26 @@
     </div>
   </header>
 
-  <section id="consoles">
-    <!-- Existing content -->
+  <!-- Popup -->
+  <div id="popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;">
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px;">
+          <h2>Welcome to Trade Net!</h2>
+          <p>Thank you for visiting our website.</p>
+          <p>Click the button below to continue browsing.</p>
+          <button id='closePopUp'">Close</button>
+      </div>
+  </div>
 
-    <!-- New div for displaying random items -->
+
+  <section id="consoles">
     <div class="random-items" id="itemsList"></div>
   </section>
 
+
+
   <footer>
-    <!-- Your existing footer -->
+    <p>&copy; 2023 Trade Net. All rights reserved.</p>
+    
   </footer>
 
 </body>
