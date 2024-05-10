@@ -43,23 +43,17 @@ function displayPopup() {
 }
 
 // Function to close the popup
-    const popup = document.getElementById('closePopUp');
-    const popUpDisplay = document.getElementById('popup');
-    popup.onclick = function(){
-        popUpDisplay.style.display = 'none';
-    }
+ 
     
 
 // Wait for DOMContentLoaded event before executing the code
 document.addEventListener('DOMContentLoaded', function() {
     displayRandomItems();
     const popupShown = localStorage.getItem('popupShown');
-    if (!popupShown) {
-        // If the popup has not been shown, display it
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        // If the user is not logged in, display the popup
         displayPopup();
-
-        // Set a flag in localStorage to indicate that the popup has been shown
-        localStorage.setItem('popupShown', 'true');
     }
 });
 
