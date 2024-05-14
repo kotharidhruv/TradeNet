@@ -42,17 +42,15 @@ function displayPopup() {
     popup.style.display = 'block';
 }
 
-// Function to close the popup
- 
+
     
 
-// Wait for DOMContentLoaded event before executing the code
 document.addEventListener('DOMContentLoaded', function() {
     displayRandomItems();
+    
     const popupShown = localStorage.getItem('popupShown');
     const userId = localStorage.getItem('userId');
     if (!userId) {
-        // If the user is not logged in, display the popup
         displayPopup();
     }
 });
@@ -63,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function displayRandomItems() {
     const itemsRef = ref(db, 'items/');
     const itemsList = document.getElementById('itemsList');
-    itemsList.innerHTML = ''; // Clear previous content
+    itemsList.innerHTML = ''; 
 
     onValue(itemsRef, function(snapshot) {
         const users = snapshot.val();
@@ -72,14 +70,10 @@ function displayRandomItems() {
         if (currentUser) {
             let allItems = [];
 
-            // Iterate over each user
             Object.keys(users).forEach(userId => {
-                // Exclude items posted by the current user
                 if (userId !== currentUser) {
-                    // Push items of this user to allItems array
                     const userItems = users[userId];
                     Object.keys(userItems).forEach(itemId => {
-                        // Add userId and itemId to each item
                         userItems[itemId].userId = userId;
                         userItems[itemId].itemId = itemId;
                         allItems.push(userItems[itemId]);
@@ -87,7 +81,6 @@ function displayRandomItems() {
                 }
             });
 
-            // Generate three random indices
             const randomIndices = [];
             while (randomIndices.length < 3) {
                 const randomIndex = Math.floor(Math.random() * allItems.length);
@@ -96,7 +89,6 @@ function displayRandomItems() {
                 }
             }
 
-            // Display three random items
             randomIndices.forEach(index => {
                 const item = allItems[index];
                 const itemId = item.itemId;
@@ -104,8 +96,7 @@ function displayRandomItems() {
                 const itemDiv = document.createElement('div');
                 itemDiv.classList.add('random-item');
 
-                // Set width to 33.33%
-                itemDiv.style.width = 'calc(33.33% - 20px)'; // Adjust as needed
+                itemDiv.style.width = 'calc(33.33% - 20px)'; 
 
                 const itemLink = document.createElement('a');
                 itemLink.href = `../itemDetails/itemDetails.html?userId=${item.userId}&itemId=${item.itemId}`;
@@ -118,18 +109,15 @@ function displayRandomItems() {
 
                 getDownloadURL(storageRef(storage, `images/${itemId}`)).then((url) => {
                     itemImage.onload = function() {
-                        // Set fixed dimensions for the image
-                        const targetWidth = 200; // Adjust as needed
-                        const targetHeight = 300; // Adjust as needed
+                        const targetWidth = 200; 
+                        const targetHeight = 300; 
                         const aspectRatio = this.width / this.height;
 
-                        // Set width and height based on aspect ratio
+                        
                         if (aspectRatio > 1) {
-                            // Landscape image
                             this.width = targetWidth;
                             this.height = targetWidth / aspectRatio;
                         } else {
-                            // Portrait or square image
                             this.height = targetHeight;
                             this.width = targetHeight * aspectRatio;
                         }
@@ -137,8 +125,7 @@ function displayRandomItems() {
                     itemImage.src = url;
                 }).catch((error) => {
                     console.error('Error getting download URL:', error);
-                    // Handle missing image here (e.g., display a placeholder)
-                    itemImage.src = 'placeholder.jpg'; // Provide a placeholder image URL
+                    itemImage.src = 'placeholder.jpg'; // 
                 });
 
                 const itemText = document.createElement('div');

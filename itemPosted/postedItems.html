@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Posted Items</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+  <link rel="icon" href="../icon.png" type="image/png">
+
   <style>
     * {
       margin: 0;
@@ -15,68 +17,67 @@
 
     body {
       font-family: 'IBM Plex Mono', monospace;
-      background-color: #f0f0f0;
+      background-color: #1c1c1c;
+      color: #ffffff;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      /* Ensure the content takes at least the full viewport height */
     }
 
     nav {
-      background-color: #333;
-      color: #fff;
+      background-color: #000000;
+      color: #ffffff;
       padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     nav #title {
-      margin-right: auto;
-      font-size: 1.5rem;
-      animation: titleColorChange 5s infinite alternate;
-      /* Apply animation */
+      font-size: 2rem;
+      color: #ffffff;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease;
     }
 
-    @keyframes titleColorChange {
-      0% {
-        color: white;
-      }
-
-      50% {
-        color: orange;
-      }
-
-      100% {
-        color: white;
-      }
+    nav #title:hover {
+      border-color: #454545;
     }
 
     nav ul {
       list-style: none;
       display: flex;
+      align-items: center;
+      margin: 0;
+      padding: 0;
     }
 
     nav ul li {
-      margin-right: 1rem;
+      margin: 0 1rem;
     }
 
     nav ul li a {
       text-decoration: none;
-      color: #fff;
+      color: #ffffff;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #454545;
     }
 
     .login-container {
-      flex: 1;
-      /* Take remaining vertical space */
+      flex: 1;     
       display: flex;
       align-items: center;
-      /* Center the content vertically */
       justify-content: center;
-      /* Center the content horizontally */
     }
 
     .login-content {
       width: 80%;
-      /* Adjust the width of the content */
-      background-color: #fff;
+      background-color: #ffffff;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -90,14 +91,15 @@
     h2 {
       margin-bottom: 20px;
       text-align: center;
+      color: #000000;
     }
 
     .item {
-      border: 1px solid #70a8af;
+      border: 1px solid black;
       border-radius: 8px;
       padding: 20px;
       margin-bottom: 20px;
-      background-color: #345d66;
+      background-color: black;
     }
 
     .item h3 {
@@ -128,7 +130,7 @@
       padding: 8px 15px;
       border: none;
       border-radius: 5px;
-      background-color: #70a8af;
+      background-color: gray;
       color: #fff;
       cursor: pointer;
       transition: background-color 0.3s ease;
@@ -175,7 +177,8 @@
     }
   </style>
 
-  <!-- Include Firebase and JavaScript sources -->
+
+
   <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js"></script>
   <script type="module" src="postedItems.js" defer></script>
@@ -183,14 +186,10 @@
 
 <body>
   <nav>
-    <h1 id="title">Trade Net</h1>
+    <a id="title" href="#">SwapZone</a>
     <ul id="links">
       <li><a href="/index.html">Home</a></li>
-      <li><a href="#consoles">Products</a></li>
-      <li><a href="/login.html">Login</a></li>
-      <li><a href="/signup.html">Sign Up</a></li>
       <li><a href="/postItems/postItems.html">Post</a></li>
-      <li><a href="/itemPosted/postedItems.html">Posted Items</a></li>
       <li><a href="/allItemsPosted/allItemsPosted.html">All Posted Items</a></li>
     </ul>
   </nav>
@@ -199,12 +198,10 @@
       <form>
         <h2>My Posted Items</h2>
         <div id="postedItemsList" style="max-width: 800px;">
-          <!-- Sample Posted items -->
+  
           <div class="item">
             <h3>Item Title 1</h3>
-            <p>Description of Item 1 goes here. Description of Item 1 goes here. Description of Item 1 goes
-              here. Description of Item 1 goes here. Description of Item 1 goes here. Description of Item 1
-              goes here. Description of Item 1 goes here.</p>
+            <p>Description of Item 1 goes here.</p>
             <div class="actions">
               <button>Edit</button>
               <button>Delete</button>
@@ -219,7 +216,7 @@
               <button>Delete</button>
             </div>
           </div>
-          <!-- Add more items as needed -->
+         
         </div>
       </form>
     </div>

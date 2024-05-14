@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
 
-    const usersRef = ref(db, `user/${userId}`); // Correct reference path
+    const usersRef = ref(db, `user/${userId}`); 
 
     onValue(usersRef, (snapshot) => {
         const user = snapshot.val();
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const userDetailsContainer = document.createElement('div');
 
             const userName = document.createElement('h2');
-            userName.textContent = user.username; // Change to username
+            userName.textContent = user.username; 
 
             const userEmail = document.createElement('p');
             userEmail.textContent = user.email;

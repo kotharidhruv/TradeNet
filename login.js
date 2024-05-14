@@ -30,18 +30,18 @@ signIn.addEventListener("click",function(event){
 
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed up 
+    
     const user = userCredential.user;
     alert("logged in")
     const userId = user.uid;
     localStorage.setItem('userId',userId)
     window.location.href = 'index.html'
-    // ...
+    
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorMessage)
-    // ..
+    
   });
 })

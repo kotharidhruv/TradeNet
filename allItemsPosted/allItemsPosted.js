@@ -36,14 +36,10 @@ function displayItems() {
         if (currentUser) {
             let filteredItems = [];
 
-            // Iterate over each user
             Object.keys(users).forEach(userId => {
-                // Exclude items posted by the current user
                 if (userId !== currentUser) {
-                    // Push items of this user to filteredItems array
                     const userItems = users[userId];
                     Object.keys(userItems).forEach(itemId => {
-                        // Add userId and itemId to each item
                         userItems[itemId].userId = userId;
                         userItems[itemId].itemId = itemId;
                         filteredItems.push(userItems[itemId]);
@@ -59,7 +55,6 @@ function displayItems() {
                 itemDiv.classList.add('item');
 
                 const itemLink = document.createElement('a');
-                // Access userId and itemId properties correctly
                 itemLink.href = `../itemDetails/itemDetails.html?userId=${item.userId}&itemId=${item.itemId}`;
                 itemLink.style.textDecoration = 'none';
 
@@ -83,5 +78,4 @@ function displayItems() {
     });
 }
 
-// Call displayItems function when the window loads
 window.onload = displayItems;

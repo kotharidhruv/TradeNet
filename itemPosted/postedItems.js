@@ -30,7 +30,7 @@ const userId = localStorage.getItem('userId')
 
 function displayPostedItems() {
     const postedItemsList = document.getElementById('postedItemsList');
-    postedItemsList.innerHTML = ''; // Clear previous items
+    postedItemsList.innerHTML = ''; 
 
     const userId = localStorage.getItem('userId');
     if (!userId) {
@@ -40,7 +40,7 @@ function displayPostedItems() {
 
     const itemsRef = ref(db,'items/' + userId);
 
-    // Listen for changes in data
+
     onValue(itemsRef, function(snapshot) {
         const data = snapshot.val();
         if (!data) {
@@ -48,12 +48,12 @@ function displayPostedItems() {
             return;
         }
 
-        // Loop through each posted item and display it
+
         Object.keys(data).forEach((itemId) => {
             const itemData = data[itemId];
-            console.log(itemData); // Log item data to console
+            console.log(itemData); 
 
-            // Create HTML elements to display the items
+   
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('item');
 

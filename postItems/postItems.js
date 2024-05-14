@@ -27,29 +27,26 @@ const handleFormSubmit = async (e) => {
     const userId = localStorage.getItem('userId'); // Get userId from localStorage
     const itemID = Date.now().toString(36) + Math.random().toString(36).substr(2);
 
-    // Get the file input element
     const fileInput = postItemForm['itemImage'];
 
-    // Get the selected file
     const file = fileInput.files[0];
 
     try {
-        // Save item data to Firebase Realtime Database
         await set(ref(db, `items/${userId}/${itemID}`), {
             name: itemName,
             description: itemDescription,
-            imageURL: '' // Placeholder for the image URL
+            imageURL: '' 
         });
 
-        // Upload the image to Firebase Storage
+        
         const storage = getStorage();
-        const storageReference = storageRef(storage, `images/${itemID}`); // Use storageRef function to get a reference
-        await uploadBytes(storageReference, file); // Upload file bytes directly
+        const storageReference = storageRef(storage, `images/${itemID}`); 
+        await uploadBytes(storageReference, file); 
 
-        // Get the image download URL
+        
         const downloadURL = await getDownloadURL(storageReference);
 
-        // Update the item data with the image URL
+        
         await set(ref(db, `items/${userId}/${itemID}`), {
             name: itemName,
             description: itemDescription,
@@ -64,24 +61,24 @@ const handleFormSubmit = async (e) => {
     }
 };
 
-// Check if user is signed in
+
 onAuthStateChanged(auth, (user) => {
     const postItemForm = document.getElementById('postItemForm');
 
-    // Function to handle form submission
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (localStorage.getItem('userId')) {
-            // User is signed in, enable form submission
+            
             await handleFormSubmit(e);
         } else {
-            // User is not signed in, display a message or redirect to sign-in page
+            
             alert('Please sign in to post items.');
-            // You can redirect to sign-in page using window.location.href = 'signin.html';
+            
         }
     };
 
-    // Attach submit event listener only if user is signed in
+    
     if (user) {
         postItemForm.addEventListener('submit', handleSubmit);
     }
