@@ -35,7 +35,7 @@ signIn.addEventListener("click",function(event){
     alert("logged in")
     const userId = user.uid;
     localStorage.setItem('userId',userId)
-    window.location.href = '../index.html'
+    window.location.href = 'index.html'
     
   })
   .catch((error) => {
