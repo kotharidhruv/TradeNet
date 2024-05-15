@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +12,9 @@
   <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js"></script>
-  
+
   <script type="module" src="postItems.js" defer></script>
-  
+
   <style>
     * {
       margin: 0;
@@ -152,8 +153,8 @@
       left: 0;
       bottom: 0;
       width: 100%;
-      background-color: #000000; 
-      color: #ffffff; 
+      background-color: #000000;
+      color: #ffffff;
       text-align: center;
       padding: 10px 0;
       height: 100px 0;
@@ -161,11 +162,11 @@
     }
   </style>
 </head>
+
 <body>
   <nav>
-    <a id="title" href="#">SwapZone</a>
+    <a id="title" href="/index.html">SwapZone</a>
     <ul id="links">
-      <li><a href="/index.html">Home</a></li>
       <li><a href="/itemPosted/postedItems.html">Posted Items</a></li>
       <li><a href="/allItemsPosted/allItemsPosted.html">All Posted Items</a></li>
     </ul>
@@ -179,7 +180,7 @@
 
         <label for="itemDescription">Item Description:</label><br>
         <textarea id="itemDescription" name="itemDescription" rows="4" cols="50" required></textarea><br><br>
-        
+
         <label for="itemImage">Choose an image:</label><br>
         <input type="file" id="itemImage" name="itemImage" accept="image/**"><br><br>
 
@@ -191,4 +192,5 @@
     <h2 style="color: white;">&copy; 2024 SwapZone. All rights reserved.</h2>
   </footer>
 </body>
+
 </html>

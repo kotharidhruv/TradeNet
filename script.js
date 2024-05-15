@@ -21,14 +21,22 @@ const storage = getStorage();
 const userId = localStorage.getItem('userId');
 
 window.setInterval(changeSlide, 5000);
-let currentSlide = 0;
+let currentSlide = 1;
 
 function changeSlide() {
-    const slides = document.querySelectorAll(".slide");
-    let lastSlide = currentSlide;
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[lastSlide].classList.toggle("show");
-    slides[currentSlide].classList.toggle("show");
+  let slides = document.querySelectorAll(".slide");
+
+  let lastSlide = currentSlide;
+  currentSlide++;
+
+  if (lastSlide < 0) {
+    lastSlide = slides.length - 1;
+  }
+  if (currentSlide >= slides.length) {
+    currentSlide = 0;
+  }
+  slides[lastSlide].classList.toggle("show");
+  slides[currentSlide].classList.toggle("show");
 }
 
 const signout = document.getElementById('signout');
